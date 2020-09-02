@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginxic-service
+  namespace: nginxic
+  labels:
+    app: nginxic
+    cis.f5.com/as3-app: nginxic
+    cis.f5.com/as3-pool: nginx_pool
+    cis.f5.com/as3-tenant: nginxic
+spec:
+  ports:
+    - name: 80-tcp
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: nginxic
+  type: ClusterIP

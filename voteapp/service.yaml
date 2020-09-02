@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: example-voting-app
+  namespace: mikenamespace
+  labels:
+    app: example-voting-app
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: example-voting-app
+  type: ClusterIP

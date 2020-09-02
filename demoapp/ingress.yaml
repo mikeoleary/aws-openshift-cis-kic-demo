@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: demoapp-ingress
+  namespace: f5demoapp
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - host: demovs.my-f5.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: f5-demo-httpd
+          servicePort: 8080

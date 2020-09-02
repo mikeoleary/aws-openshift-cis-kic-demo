@@ -1,0 +1,79 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  creationTimestamp: '2020-08-30T18:31:25Z'
+  generation: 1
+  name: f5-bigip-ctlr-operator
+  namespace: openshift-operators
+  resourceVersion: '1557283'
+  selfLink: >-
+    /apis/operators.coreos.com/v1alpha1/namespaces/openshift-operators/subscriptions/f5-bigip-ctlr-operator
+  uid: 9a637851-cdd3-485c-951d-1c926bd95287
+spec:
+  channel: beta
+  installPlanApproval: Automatic
+  name: f5-bigip-ctlr-operator
+  source: certified-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: f5-bigip-ctlr-operator.v1.1.0
+status:
+  installplan:
+    apiVersion: operators.coreos.com/v1alpha1
+    kind: InstallPlan
+    name: install-hhdhj
+    uuid: b5662bf0-83c0-4ea3-b636-08ab3cac7919
+  lastUpdated: '2020-08-30T18:31:29Z'
+  installedCSV: f5-bigip-ctlr-operator.v1.1.0
+  currentCSV: f5-bigip-ctlr-operator.v1.1.0
+  installPlanRef:
+    apiVersion: operators.coreos.com/v1alpha1
+    kind: InstallPlan
+    name: install-hhdhj
+    namespace: openshift-operators
+    resourceVersion: '1557195'
+    uid: b5662bf0-83c0-4ea3-b636-08ab3cac7919
+  state: AtLatestKnown
+  catalogHealth:
+    - catalogSourceRef:
+        apiVersion: operators.coreos.com/v1alpha1
+        kind: CatalogSource
+        name: certified-operators
+        namespace: openshift-marketplace
+        resourceVersion: '1551520'
+        uid: 444d7f0d-260a-45e4-a504-9d27f2e258e3
+      healthy: true
+      lastUpdated: '2020-08-30T18:31:25Z'
+    - catalogSourceRef:
+        apiVersion: operators.coreos.com/v1alpha1
+        kind: CatalogSource
+        name: community-operators
+        namespace: openshift-marketplace
+        resourceVersion: '1551533'
+        uid: d42fe4ca-c7c4-4a4b-9d95-48c4ae28a145
+      healthy: true
+      lastUpdated: '2020-08-30T18:31:25Z'
+    - catalogSourceRef:
+        apiVersion: operators.coreos.com/v1alpha1
+        kind: CatalogSource
+        name: redhat-marketplace
+        namespace: openshift-marketplace
+        resourceVersion: '1551535'
+        uid: 180c1bc0-0d99-43c6-9f4f-4ac3f82cf786
+      healthy: true
+      lastUpdated: '2020-08-30T18:31:25Z'
+    - catalogSourceRef:
+        apiVersion: operators.coreos.com/v1alpha1
+        kind: CatalogSource
+        name: redhat-operators
+        namespace: openshift-marketplace
+        resourceVersion: '1551521'
+        uid: 3675ab86-3802-4d1d-a1b2-35c7b42ad09b
+      healthy: true
+      lastUpdated: '2020-08-30T18:31:25Z'
+  conditions:
+    - lastTransitionTime: '2020-08-30T18:31:25Z'
+      message: all available catalogsources are healthy
+      reason: AllCatalogSourcesHealthy
+      status: 'False'
+      type: CatalogSourcesUnhealthy
+  installPlanGeneration: 1

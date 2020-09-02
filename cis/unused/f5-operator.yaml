@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: f5-bigip-ctlr-operator
+  namespace: kube-system
+spec:
+  targetNamespaces:
+  - kube-system

@@ -1,0 +1,22 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: example-voting-app
+  namespace: mikenamespace
+  labels:
+    app: example-voting-app
+spec:
+  host: example-voting-app.apps.ocpcluster.my-f5.com
+  to:
+    kind: Service
+    name: example-voting-app
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: example-voting-app.apps.ocpcluster.my-f5.com
+      routerName: default
+      wildcardPolicy: None
+      routerCanonicalHostname: apps.ocpcluster.my-f5.com
