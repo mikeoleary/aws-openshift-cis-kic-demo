@@ -32,7 +32,9 @@ oc apply -f rbac.yaml
 oc apply -f default-server-secret.yaml
 oc apply -f nginx-config.yaml
 oc apply -f deployment.yaml
-oc apply -f service.yaml
+oc apply -f service-80.yaml
+oc apply -f service-443.yaml
+oc apply -f service-10254.yaml
 oc apply -f configmap.yaml
 
 ## DELETE

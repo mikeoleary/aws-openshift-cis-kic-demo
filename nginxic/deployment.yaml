@@ -28,6 +28,8 @@ spec:
           containerPort: 443
         - name: readiness-port
           containerPort: 8081
+        - name: metrics-port
+          containerPort: 10254
        #- name: prometheus
          #containerPort: 9113
         readinessProbe:

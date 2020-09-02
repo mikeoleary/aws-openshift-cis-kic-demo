@@ -1,19 +1,19 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: nginxic-service
+  name: nginxic-service-10254
   namespace: nginxic
   labels:
     app: nginxic
     cis.f5.com/as3-app: nginxic
-    cis.f5.com/as3-pool: nginx_pool
+    cis.f5.com/as3-pool: nginx_pool_10254
     cis.f5.com/as3-tenant: nginxic
 spec:
   ports:
-    - name: 80-tcp
+    - name: 10254-tcp
       protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 10254
+      targetPort: 10254
   selector:
     app: nginxic
   type: ClusterIP
