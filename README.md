@@ -3,7 +3,27 @@ Setup files for OCP cluster on AWS and deploying CIS, KIC, and a demo app
 
 ## Set up of OpenShift cluster
 * Run the command ```oc get clusternetwork``` and make a note of the IP range from which pod IP addresses will be assigned. The default is 10.128.0.0/14 so yours may be the same. Make a note of the subnet mask (by default this is /14).
-* Edit the file **/openshift-setup/f5-bigip-node01.yaml** and change the value of **hostIP** in the last line so that the IP address is the internal SelfIP of the BIG-IP.
+```
+# oc get clusternetwork
+NAME      CLUSTER NETWORK   SERVICE NETWORK   PLUGIN NAME
+default   10.128.0.0/14     172.30.0.0/16     redhat/openshift-ovs-networkpolicy
+```
+* Edit the file [openshift-setup/f5-bigip-node01.yaml](openshift-setup/f5-bigip-node01.yaml) and change the value of **hostIP** in the last line so that the IP address is the internal SelfIP of the BIG-IP. Example:
+```yaml
+apiVersion: v1
+kind: HostSubnet
+metadata:
+  name: f5-bigip-node01
+  annotations:
+    pod.network.openshift.io/fixed-vnid-host: "0"
+    pod.network.openshift.io/assign-subnet: "true"
+# provide a name for the node that will serve as BIG-IP's entry into the cluster
+host: f5-bigip-node01
+# The hostIP address will be the BIG-IP interface address routable to the
+# OpenShift Origin nodes.
+# This address is the BIG-IP VTEP in the SDN's VXLAN.
+hostIP: 10.0.2.51
+```
 * Apply this configuration so that the BIG-IP is assigned a hostubnet from within OpenShift:
 ```
 # cd /openshift-setup
@@ -25,9 +45,9 @@ ip-10-0-3-97.ec2.internal    ip-10-0-3-97.ec2.internal    10.0.3.97    10.130.0.
 ## Set up of BIG-IP
 ### Set up the VXLAN tunnel
 * Calculate selfIP of the tunnel and the subnet mask.
- * The IP address will be any IP within the subnet range that is assigned to the BIG-IP. In the example above, that is 10.131.2.0/23, so I will choose 10.131.2.100
- * The subnet mask will be that of the cluster network (in this case /14). **The subnet mask is not /23, it is /14,** because we want the tunnel to route all traffic to the entire cluster network range.
-* Copy the file /bigip-setup/vxlan-setup.sh to the BIG-IP, mark it as executable and run it with a single argument, which will be the value of the selfIP of the tunnel. **The script below should be run on BIG-IP after copying the file /bigip-setup/vxlan-setup.sh to the BIG-IP.** 
+  * The IP address will be any IP within the subnet range that is assigned to the BIG-IP. In the example above, that is 10.131.2.0/23, so I will choose 10.131.2.100
+  * The subnet mask will be that of the cluster network (in this case /14). **The subnet mask is not /23, it is /14,** because we want the tunnel to route all traffic to the entire cluster network range.
+* Copy the file [bigip-setup/vxlan-setup.sh](bigip-setup/vxlan-setup.sh) to the BIG-IP, mark it as executable and run it with a single argument, which will be the value of the selfIP of the tunnel. **The script below should be run on BIG-IP after copying the file /bigip-setup/vxlan-setup.sh to the BIG-IP.** 
 ```
 # chmod +x vxlan-setup.sh
 # ./vxlan-setup.sh 10.131.2.100/14
