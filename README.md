@@ -1,5 +1,5 @@
 # aws-openshift-cis-kic-demo
-Setup files for OCP cluster on AWS and deploying CIS, KIC, and a demo app
+Setup files for OCP cluster on AWS and deploying CIS, KIC, and a demo app. Running through the steps below will deploy a RedHat OpenShift cluster on AWS, a F5 BIG-IP device, and the deployments inside the container environment necessary to expose a demo application.
 
 ## Set up of OpenShift cluster
 * Run the command ```oc get clusternetwork``` and make a note of the IP range from which pod IP addresses will be assigned. The default is 10.128.0.0/14 so yours may be the same. Make a note of the subnet mask (by default this is /14).
@@ -29,7 +29,7 @@ hostIP: 10.0.2.51
 # cd /openshift-setup
 # oc apply -f f5-bigip-node01.yaml
 ```
-* Check to see that the BIG-IP was added to the list of hosts and that it has a hostsubnet assigned.
+* Check to see that the BIG-IP was added to the list of hosts and that it has a hostsubnet assigned with the command ``` oc get hostsubnets ```. Example output below:
 ```
 #oc get hostsubnets
 NAME                         HOST                         HOST IP      SUBNET          EGRESS CIDRS   EGRESS IPS

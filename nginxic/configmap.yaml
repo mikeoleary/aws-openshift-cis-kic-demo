@@ -20,15 +20,56 @@ data:
                      "class": "Tenant",
                      "nginxic": {
                         "class": "Application",
-                        "template": "http",
-                        "serviceMain": {
-                              "class": "Service_HTTP",
+                        "template": "generic",
+                        "nginx_vs_80": {
+                              "class": "Service_L4",
+                              "virtualPort": 80,
                               "virtualAddresses": [
                                  "10.0.0.40"
                               ],
-                              "pool": "nginx_pool"
+                              "pool": "nginx_pool_80"
                         },
-                        "nginx_pool": {
+                        "nginx_pool_80": {
+                              "class": "Pool",
+                              "monitors": [
+                                 "http"
+                              ],
+                              "members": [
+                                 {
+                                    "servicePort": 443,
+                                    "serverAddresses": []
+                                 }
+                              ]
+                        },
+                        "nginx_vs_443": {
+                              "class": "Service_L4",
+                              "virtualPort": 443,
+                              "virtualAddresses": [
+                                 "10.0.0.40"
+                              ],
+                              "pool": "nginx_pool_443"
+                        },
+                        "nginx_pool_443": {
+                              "class": "Pool",
+                              "monitors": [
+                                 "https"
+                              ],
+                              "members": [
+                                 {
+                                    "servicePort": 443,
+                                    "serverAddresses": []
+                                 }
+                              ]
+                        },
+                        "nginx_vs_10254": {
+                              "class": "Service_L4",
+                              "virtualPort": 10254,
+                              "virtualAddresses": [
+                                 "10.0.0.40"
+                              ],
+                              "pool": "nginx_pool_10254"
+                        },
+                        "nginx_pool_10254": {
                               "class": "Pool",
                               "monitors": [
                                  "http"
