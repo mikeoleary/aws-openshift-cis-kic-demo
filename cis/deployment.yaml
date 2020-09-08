@@ -49,7 +49,12 @@ spec:
             "--openshift-sdn-name=/Common/openshift_vxlan",
             "--agent=as3",
             "--insecure=true",
-            "--as3-validation=false"
+            "--as3-validation=false",
+            "--manage-routes=false",
+            "--route-vserver-addr=1.1.1.1",
+            "--log-as3-response=true",
+            "--log-level=DEBUG",
+            "--namespace=nginxic"
             ]
       imagePullSecrets:
         # Secret that gives access to a private docker registry
