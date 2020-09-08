@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-  - host: demovs.my-f5.com
+  - host: demo.my-f5.com
     http:
       paths:
       - path: /
