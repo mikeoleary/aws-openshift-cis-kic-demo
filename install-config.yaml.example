@@ -1,0 +1,47 @@
+apiVersion: v1
+baseDomain: <domain for ocpcluster, eg, my-f5.com>
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 3
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform:
+    aws:
+      rootVolume:
+        iops: 0
+        size: 0
+        type: ""
+      type: m5.xlarge
+      zones:
+      - us-east-1a
+      - us-east-1b
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: ocpcluster
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  aws:
+    region: us-east-1
+    subnets:
+    - subnet-.................
+    - subnet-.................
+    - subnet-.................
+    - subnet-.................
+publish: External
+pullSecret: '<insert here>'
+sshKey: |
+  ssh-rsa EXAMPLEKEYDATA== ubuntu@ip-10-0-0-145
